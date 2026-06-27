@@ -68,66 +68,100 @@ public class Admin {
         } while (choice != 8);
     }
 
+    // =============== ADD PET ===============
     public static void addPet() {
-        
+
         try {
             System.out.println("Pet Name: ");
             String name = input.nextLine();
-            
+
             System.out.println("Species: ");
             String species = input.nextLine();
-            
+
             System.out.println("Breed: ");
             String breed = input.nextLine();
-            
+
             System.out.println("Age: ");
             int age = input.nextInt();
             input.nextLine();
-            
+
             System.out.println("Health Condition: ");
             String healthCondition = input.nextLine();
-            
-            System.out.println("Vaccination Status");
-            String vaccinationStatus = input.nextLine();
-            
+
             Connection con = DBConnect.getConnection();
-            
-            String sql = 
-                    "INSERT INTO "
+
+            String sql
+                    = "INSERT INTO "
                     + "(pet_name, species, breed, age,"
                     + "health_condition, vaccination_status)"
                     + " VALUES (?, ?, ?, ?, ?, ?)";
-            
+
             PreparedStatement pst = con.prepareStatement(sql);
-            
+
             pst.setString(1, name);
             pst.setString(2, species);
             pst.setString(3, breed);
             pst.setInt(4, age);
             pst.setString(5, healthCondition);
-            pst.setString(6, vaccinationStatus);
-            
+
             int rows = pst.executeUpdate();
-            
-            if(rows > 0) {
+
+            if (rows > 0) {
                 System.out.println("Pet Added Successfully!");
             }
-            
+
         } catch (Exception e) {
             System.out.println(e);
         }
     }
 
+    // =============== VIEW/READ PETS ===============
     public static void viewPets() {
+        try {
+            Connection con = DBConnect.getConnection();
+
+            Statement st = con.createStatement();
+
+            ResultSet rs
+                    = st.executeQuery(
+                            "SELECT * FROM pets WHERE archived = FALSE");
+
+            System.out.println("\n===== PET LIST =====");
+
+            while (rs.next()) {
+
+                System.out.println("ID: " + rs.getInt("pet_id"));
+
+                System.out.println("Name: " + rs.getString("pet_name"));
+
+                System.out.println("Species: " + rs.getString("species"));
+
+                System.out.println("Breed: " + rs.getString("breed"));
+
+                System.out.println("Age: " + rs.getInt("age"));
+
+                System.out.println("Health Condition: " + rs.getString("health_condition"));
+
+                System.out.println("Vaccination Status: " + rs.getString("vaccination_status"));
+
+                System.out.println("Adoption Status: " + rs.getString("adoption_status"));
+
+                System.out.println("-------------------------");
+
+                con.close();
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public static void searchPet() {
     }
 
     public static void updatePet() {
     }
 
     public static void deletePet() {
-    }
-
-    public static void searchPet() {
     }
 
     public static void archivePet() {
