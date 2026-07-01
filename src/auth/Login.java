@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 public class Login {
     
+    public static int loggedInUserId = -1;
+    
     public static String login() {
         
         Scanner input = new Scanner(System.in);
@@ -21,7 +23,7 @@ public class Login {
             
             Connection con = DbConnection.getConnection();
             
-            String sql = "SELECT role FROM users WHERE username = ? AND password = ?";
+            String sql = "SELECT user_id, role FROM users WHERE username = ? AND password = ?";
             
             PreparedStatement pst = con.prepareStatement(sql);
             
@@ -31,6 +33,9 @@ public class Login {
             ResultSet rs = pst.executeQuery();
             
             if (rs.next()) {
+                
+                loggedInUserId = rs.getInt("user_id");
+                
                 return rs.getString("role");
             }
             

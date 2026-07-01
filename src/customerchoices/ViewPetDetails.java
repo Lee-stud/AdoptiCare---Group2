@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class ViewPetDetails {
 
-    public static void viewPetDetails() {
+    public static void viewPetDetails(int petId) {
 
         Scanner input = new Scanner(System.in);
 
@@ -32,7 +32,7 @@ public class ViewPetDetails {
 
             ResultSet rs = st.executeQuery(sql);
 
-            while (rs.next()) {
+            if (rs.next()) {
                 
                 System.out.println("\nPet ID: " + rs.getInt("pet_id"));
 
@@ -65,6 +65,8 @@ public class ViewPetDetails {
                 System.out.println("Vaccination Status: " + rs.getString("vaccination_status"));
                 
                 System.out.println("==============================");
+            } else {
+                System.out.println("Pet not found.");
             }
 
         } catch (SQLException e) {

@@ -5,6 +5,7 @@ import database.DbConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
@@ -16,23 +17,26 @@ public class SearchPet {
             
             Scanner input = new Scanner(System.in);
             
-            System.out.println("Pet Name: ");
+            System.out.print("\nEnter Pet Name: ");
             String petName = input.nextLine();
             
             Connection con = DbConnection.getConnection();
             
             String sql = 
-                    "SELECT * FROM pets WHERE pet_name = ?";
+                    "SELECT * FROM pets WHERE pet_name LIKE ? "
+                    + "AND archived = 0";
             
             PreparedStatement pst = con.prepareStatement(sql);
             
-            pst.setString(1, petName);
+            pst.setString(1, "%" + petName + "%");
             
             ResultSet rs = pst.executeQuery(sql);
             
             if (rs.next()){
  
                 do {
+                    
+                    System.out.println("====================");
                     System.out.println("Pet ID: " + rs.getInt("pet_id"));
                     
                     System.out.println("Pet Name: " + rs.getString("pet_name"));
@@ -52,12 +56,18 @@ public class SearchPet {
                     System.out.println("Description: " + rs.getString("description"));
 
                 } while (rs.next());
+                
+                System.out.println("\nEnter Pet ID to view details: ");
+                int petId = input.nextInt();
+                
+                ViewPetDetails.viewPetDetails(petId);
+                
             } else {
                 System.out.println("Pet not found.");
             }
             
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 }

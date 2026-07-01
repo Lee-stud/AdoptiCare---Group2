@@ -50,13 +50,26 @@ public class AdoptiCareMain {
 
         if (role == null) {
             System.out.println("Invalid username or password.");
-
-        } else if (role.equals("Administrator")) {
-            Admin.adminMenu();
-        } else if (role.equals("Veterinarian")) {
-            Veterinarian.veterinarianMenu();
-        } else if (role.equals("Customer")) {
-            Customer.customerMenu();
+            
+            return;
+        }
+        
+        switch (role) {
+            
+            case "Administrator":
+                Admin.adminMenu();
+                break;
+                
+            case "Veterinarian":
+                Veterinarian.veterinarianMenu();
+                break;
+                
+            case "Customer":
+                Customer.customerMenu();
+                break;
+                
+            default:
+                System.out.println("Invalid role.");
         }
     }
 }
