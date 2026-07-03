@@ -26,13 +26,12 @@ public class Register {
             
             String sql = 
                     "INSERT INTO users(username, password, role) "
-                    + "VALUES (?, ?, ?)"; 
+                    + "VALUES (?, ?, 'Customer')"; 
             
             PreparedStatement pst = con.prepareStatement(sql);
             
             pst.setString(1, username);
             pst.setString(2, hashedPassword);
-            pst.setString(3, "Customer");
             
             int rows = pst.executeUpdate();
             

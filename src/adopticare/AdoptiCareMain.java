@@ -15,9 +15,11 @@ public class AdoptiCareMain {
         do {
             System.out.println("\n===== ADOPTICARE =====");
 
-            System.out.println("1. Login");
-            System.out.println("2. Register");
-            System.out.println("3. Exit");
+            System.out.println("1. Customer Login");
+            System.out.println("2. Admin Login");
+            System.out.println("3. Veterinarian Login");
+            System.out.println("4. Register");
+            System.out.println("5. Exit");
 
             System.out.print("Choose: ");
             choice = input.nextInt();
@@ -26,27 +28,37 @@ public class AdoptiCareMain {
             switch (choice) {
 
                 case 1:
-                    handleLogin();
+                    handleCustomerLogin();
                     break;
-
+                    
                 case 2:
+                    handleAdminLogin();
+                    break;
+                    
+                case 3:
+                    handleVetLogin();
+                    break;
+                    
+                case 4:
                     Register.registerCustomer();
                     break;
 
-                case 3:
+                case 5:
                     System.out.println("Thank you for using AdoptiCare!");
                     break;
 
                 default:
                     System.out.println("Invalid choice.");
             }
-        } while (choice != 3);
+        } while (choice != 5);
     }
 
-    public static void handleLogin() {
+    public static void handleCustomerLogin() {
 
         //Data Validation in where the user will proceed
         String role = Login.login();
+        
+        
 
         if (role == null) {
             System.out.println("Invalid username or password.");
@@ -55,18 +67,47 @@ public class AdoptiCareMain {
         }
         
         switch (role) {
-            
-            case "Administrator":
-                Admin.adminMenu();
-                break;
-                
-            case "Veterinarian":
-                Veterinarian.veterinarianMenu();
-                break;
-                
             case "Customer":
                 Customer.customerMenu();
                 break;
+                
+            default:
+                System.out.println("Invalid role.");
+        }
+    }
+
+    public static void handleAdminLogin() {
+        
+       String role = AdminLogin.adminLogin();
+       
+       if (role == null) {
+           System.out.println("Invalid username or password.");
+           
+           return;
+       }
+       
+       switch (role) {
+           case "Administrator":
+               Admin.adminMenu();
+               
+           default:
+               System.out.println("Invalid role.");
+       }
+    }
+
+    public static void handleVetLogin() {
+        
+        String role = VetLogin.vetLogin();
+        
+        if (role == null) {
+            System.out.println("Invalid username or password");
+            
+            return;
+        }
+        
+        switch (role) {
+            case "Veterinarian":
+                Veterinarian.veterinarianMenu();
                 
             default:
                 System.out.println("Invalid role.");

@@ -24,7 +24,7 @@ public class SubmitAdoptionRequest {
             String sql = 
                     "INSERT INTO adoption_requests " 
                     + "(pet_id, request_date, status, review_date)" 
-                    + "VALUES (?, CURDATE(), 'Pending', CURDATE())";
+                    + "VALUES (?, CURRENT_TIMESTAMP, 'Pending', CURRENT_TIMESTAMP)";
             
             PreparedStatement pst = con.prepareStatement(sql);
             
