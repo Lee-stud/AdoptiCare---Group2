@@ -13,7 +13,7 @@ public class VetLogin {
         Scanner input = new Scanner(System.in);
 
         try {
-            System.out.println("\n===== LOGIN =====");
+            System.out.println("\n===== 🔑 LOGIN =====");
 
             String username, password;
 
@@ -22,21 +22,21 @@ public class VetLogin {
             //=====================
             while (true) {
 
-                System.out.print("Username: ");
+                System.out.print("👤 Username: ");
                 username = input.nextLine();
 
                 if (username.isEmpty()) {
-                    System.out.println("Username cannot be empty!");
+                    System.out.println("\n❌ Username cannot be empty!");
                     continue;
                 }
 
                 if (username.contains(" ")) {
-                    System.out.println("Username cannot contain spaces, use special characters(_).");
+                    System.out.println("\n❌ Username cannot contain spaces, use special characters(_).");
                     continue;
                 }
 
                 if (username.length() < 4) {
-                    System.out.println("Username must be atleast 4 or more than letters!");
+                    System.out.println("\n❌ Username must be atleast 4 or more than letters!");
                     continue;
                 }
 
@@ -48,21 +48,21 @@ public class VetLogin {
             //=========================
             while (true) {
 
-                System.out.print("Password: ");
+                System.out.print("🔒 Password: ");
                 password = input.nextLine();
 
                 if (username.isEmpty()) {
-                    System.out.println("Password cannot be empty!");
+                    System.out.println("\n❌ Password cannot be empty!");
                     continue;
                 }
 
                 if (username.contains(" ")) {
-                    System.out.println("Password cannot contain spaces, use special characters(_).");
+                    System.out.println("\n❌ Password cannot contain spaces, use special characters(_).");
                     continue;
                 }
 
                 if (username.length() < 8) {
-                    System.out.println("Password must be atleast 8 or more than letters!");
+                    System.out.println("\n❌ Password must be atleast 8 or more than letters!");
                     continue;
                 }
 
@@ -82,14 +82,14 @@ public class VetLogin {
 
             if (rs.next()) {
 
-                System.out.println("Login Successfully!");
+                System.out.println("✅ Login Successfully!");
 
                 return rs.getString("role");
             } else {
-                System.out.println("Incorrect username or password.");
+                System.out.println("❌ Incorrect username or password.");
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println("❌ Error: " + e.getMessage());
         }
 
         return null;

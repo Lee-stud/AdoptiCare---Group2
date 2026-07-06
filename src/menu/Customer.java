@@ -14,20 +14,20 @@ public class Customer {
 
     public static void customerMenu() {
         
-        System.out.println("\nWelcome to AdoptiCare, Customer!");
+        System.out.println("\n🏡 Welcome to AdoptiCare, Customer! 🐾");
         
         int choice;
         
         do {
-            System.out.println("\n===== CUSTOMER MENU =====");
+            System.out.println("\n===== 🏠 CUSTOMER MENU =====");
             
-            System.out.println("1. View Available Pets");
-            System.out.println("2. Search Pet");
-            System.out.println("3. Submit Adoption Request");
-            System.out.println("4. View Request Status");
-            System.out.println("5. Logout");
+            System.out.println("[1] 🐕 View Available Pets");
+            System.out.println("[2] 🔍 Search Pet");
+            System.out.println("[3] ❤ Submit Adoption Request");
+            System.out.println("[4] 📄 View Request Status");
+            System.out.println("[5] ⏻ Logout");
             
-            System.out.print("\nChoose: ");
+            System.out.print("\n👉 Choose an option [1-5]: ");
             choice = input.nextInt();
             
             input.nextLine();
@@ -50,14 +50,14 @@ public class Customer {
                     ViewRequestStatus.viewRequestStatus(Login.loggedInUserId);
                     
                 case 5:
-                    System.out.println("Thank you for using AdoptiCare.");
+                    System.out.println("\n🏡 Thank you for using AdoptiCare. 🐶🐱");
                     
                     Login.loggedInUserId = -1;
                     
                     break;
                     
                 default:
-                    System.out.println("Invalid choice.");
+                    System.out.println("\n❌ Invalid option.");
             }
         } while (choice != 5);
     }

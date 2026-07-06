@@ -13,37 +13,49 @@ public class SearchPet {
         Scanner input = new Scanner(System.in);
 
         try {
-
-            System.out.println("Enter Pet ID: ");
-            int id = input.nextInt();
-            input.nextLine();
-
             Connection con = DbConnection.getConnection();
 
-            String sql = "SELECT * FROM pets WHERE pet_id = ?";
+            System.out.println("\n===== 🔍 SEARCH PET =====");
+            
+            int petId;
 
-            PreparedStatement pst = con.prepareStatement(sql);
+            while (true) {
 
-            pst.setInt(1, id);
+                System.out.println("👉 Enter Pet ID: ");
 
-            ResultSet rs = pst.executeQuery();
+                if (!input.hasNextInt()) {
+                    System.out.println("\n❌ Invalid input: Please enter a number.\n");
+                    input.nextLine();
+                    continue;
+                }
 
-            System.out.printf(
-                    "%-8s %-15s %-12s %-5s %-8s %-15s %-25s%n",
-                    "Pet ID",
-                    "Pet Name",
-                    "Species",
-                    "Age",
-                    "Gender",
-                    "Breed",
-                    "Description"
-            );
+                petId = input.nextInt();
+                input.nextLine();
 
-            System.out.println("--------------------------------------------------------------------------------");
+                String sql = "SELECT * FROM pets WHERE pet_id = ?";
 
-            if (rs.next()) {
+                PreparedStatement pst = con.prepareStatement(sql);
 
-                do {
+                pst.setInt(1, petId);
+
+                ResultSet rs = pst.executeQuery();
+
+                System.out.println("--------------------------------------------------------------------------------");
+
+                if (rs.next()) {
+
+                    System.out.printf(
+                            "%-8s %-15s %-12s %-5s %-8s %-15s %-25s%n",
+                            "Pet ID",
+                            "Pet Name",
+                            "Species",
+                            "Age",
+                            "Gender",
+                            "Breed",
+                            "Description"
+                    );
+
+                    System.out.println("--------------------------------------------------------------------------------");
 
                     System.out.printf(
                             "%-8d %-15s %-12s %-5d %-8s %-15s %-25s%n",
@@ -58,14 +70,15 @@ public class SearchPet {
 
                     System.out.println("--------------------------------------------------------------------------------");
 
-                } while (rs.next());
+                    break;
 
-            } else {
-                System.out.println("Pet not found.");
+                } else {
+                    System.out.println("\n❌ Pet not found. Please try again.\n");
+                }
+
+                con.close();
+
             }
-
-            con.close();
-
         } catch (Exception e) {
             System.out.println(e);
         }

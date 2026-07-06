@@ -14,7 +14,7 @@ public class ViewAvailablePets {
         try {
             Scanner input = new Scanner(System.in);
 
-            System.out.println("\n===== AVAILABLE PETS =====");
+            System.out.println("\n===== 🐾 AVAILABLE PETS =====");
 
             Connection con = DbConnection.getConnection();
 
@@ -40,7 +40,10 @@ public class ViewAvailablePets {
 
             System.out.println("--------------------------------------------------------------------------------");
 
-            if (rs.next()) {
+            if (!rs.next()) {
+                System.out.println("\n❌ No pets available.");
+                return;
+            }
 
                 do {
 
@@ -59,16 +62,25 @@ public class ViewAvailablePets {
                     System.out.println("--------------------------------------------------------------------------------");
                 } while (rs.next());
 
-                System.out.print("\nEnter Pet ID to view details: ");
+                System.out.print("\n👉 Enter Pet ID to see more details (press 0 to cancel): ");
+                
+                if(!input.hasNextInt()) {
+                    System.out.println("❌ Invalid input. Returning to menu...");
+                    return;
+                }
+                
                 int petId = input.nextInt();
 
+                if (petId == 0) {
+                    System.out.println("↩ Returning to menu...");
+                    return;
+                }
+                
                 ViewPetDetails.viewPetDetails(petId);
-            } else {
-                System.out.println("No pets available.");
-            }
+            
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("❌ Error: " + e.getMessage());
         }
     }
 }

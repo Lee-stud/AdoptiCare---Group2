@@ -17,20 +17,20 @@ public class Register {
         try {
             Connection con = DbConnection.getConnection();
 
-            System.out.println("\n===== REGISTER =====");
+            System.out.println("\n===== 📝 REGISTER =====");
 
             String username, password;
 
             while (true) {
 
-                System.out.print("Username: ");
+                System.out.print("👤 Username: ");
                 username = input.nextLine();
 
                 //===============================================================
                 //Data validation: restricted username to have spaces/whitespace
                 //===============================================================
                 if (!username.matches("\\S+")) {
-                    System.out.println("\nInvalid username: No spaces allowed!");
+                    System.out.println("\n⚠ Invalid username: No spaces allowed!");
                     continue;
                 }
 
@@ -38,12 +38,12 @@ public class Register {
                 //Check minimum length
                 //====================
                 if (username.length() < 4) {
-                    System.out.println("\nUsername must be at least 4 characters long!");
+                    System.out.println("\n⚠ Username must be at least 4 characters long!");
                     continue;
                 }
 
                 if (username.trim().isEmpty()) {
-                    System.out.println("\nInvalid username: Fill the username.");
+                    System.out.println("\n⚠ Invalid username: Fill the username.");
                     continue;
                 }
 
@@ -58,7 +58,7 @@ public class Register {
                 ResultSet rs = checkPst.executeQuery();
 
                 if (rs.next()) {
-                    System.out.println("\nUsername already exist!");
+                    System.out.println("\n❌ Username already exist!");
                     continue;
                 }
                 break;
@@ -66,21 +66,21 @@ public class Register {
 
             while (true) {
 
-                System.out.print("Password: ");
+                System.out.print("🔒 Password: ");
                 password = input.nextLine();
 
                 if (!password.equals("\\S+")) {
-                    System.out.println("Password cannot contain spaces!");
+                    System.out.println("\n⚠ Password cannot contain spaces!");
                     continue;
                 }
 
                 if (password.length() < 8) {
-                    System.out.println("\nPassword must be atleast 8 characters long!");
+                    System.out.println("\n⚠ Password must be atleast 8 characters long!");
                     continue;
                 }
 
                 if (!password.trim().isEmpty()) {
-                    System.out.println("\nInvalid username: Fill the username.");
+                    System.out.println("\n⚠ Invalid username: Fill the username.");
                     continue;
                 }
                 break;
@@ -99,7 +99,7 @@ public class Register {
             int rows = pst.executeUpdate();
 
             if (rows > 0) {
-                System.out.println("\nRegistration Successfully!");
+                System.out.println("\n✅ Registration Successful!");
             }
 
             con.close();

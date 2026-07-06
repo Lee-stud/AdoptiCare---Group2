@@ -14,6 +14,8 @@ public class ViewArchivedPets {
 
             Connection con = DbConnection.getConnection();
 
+            System.out.println("\n🗄 ===== ARCHIVED PETS =====");
+
             String sql
                     = "SELECT * FROM pets "
                     + "WHERE archived = 1";
@@ -22,6 +24,14 @@ public class ViewArchivedPets {
 
             ResultSet rs = st.executeQuery(sql);
 
+            if (!rs.next()) {
+                System.out.println("ℹ No archived pets found.");
+                System.out.println("\nPress Enter to return to the Admin Menu...");
+                input.nextLine();
+                con.close();
+                return;
+            }
+
             System.out.printf(
                     "%-8s %-15s %-8s %-5s %-12s %-15s %-15s%n",
                     "ID", "Pet Name", "Gender", "Age", "Species", "Breed", "Status"
@@ -29,12 +39,7 @@ public class ViewArchivedPets {
 
             System.out.println("--------------------------------------------------------------------------------");
 
-            if (!rs.isBeforeFirst()) {
-                System.out.println("No archived pets found.");
-                return;
-            }
-
-            while (rs.next()) {
+            do {
 
                 System.out.printf(
                         "%-8d %-15s %-8s %-5d %-12s %-15s %-15s%n",
@@ -47,13 +52,14 @@ public class ViewArchivedPets {
                         rs.getString("adoption_status")
                 );
 
-                System.out.println("--------------------------------------------------------------------------------");
-            }
+            } while (rs.next());
+
+            System.out.println("--------------------------------------------------------------------------------");
 
             con.close();
 
         } catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("❌ Error: " + e.getMessage());
         }
     }
 }

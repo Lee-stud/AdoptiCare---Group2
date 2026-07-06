@@ -16,22 +16,22 @@ public class Veterinarian {
     
     public static void veterinarianMenu() {
         
-        System.out.println("\nWelcome Veterinarian!");
+        System.out.println("\n🏡 Welcome to AdoptiCare, Veterinarian! 🐾");
         
         int choice;
         
         do {
-            System.out.println("\n===== VETERINARIAN MENU =====");
+            System.out.println("\n===== 👨‍⚕ VETERINARIAN MENU =====");
             
-            System.out.println("\n1. Add Pet Medical Records");
-            System.out.println("2. Search Pet");
-            System.out.println("3. View Pets");
-            System.out.println("4. View Vaccinated Pets");
-            System.out.println("5. View Vaccination Schedule");
-            System.out.println("6. Update Pet Medical Records Menu");
-            System.out.println("7. Logout");
+            System.out.println("[1] ➕ Add Pet Medical Records");
+            System.out.println("[2] 🔍 Search Pet");
+            System.out.println("[3] 🐾 View Pets");
+            System.out.println("[4] 💉 View Vaccinated Pets");
+            System.out.println("[5] 📋 View Pet Medical Records");
+            System.out.println("[6] ✏ Update Pet Medical Records Menu");
+            System.out.println("[7] ⏻ Logout");
             
-            System.out.print("Choose: ");
+            System.out.print("\n👉 Choose an option [1-7]:");
             choice = input.nextInt();
             
             input.nextLine();
@@ -63,11 +63,11 @@ public class Veterinarian {
                     break;
                     
                 case 7:
-                    System.out.println("Logged out successfully!");
+                    System.out.println("\n✅ Logged out successfully!");
                     break;
                     
                 default:
-                    System.out.println("Invalid choice.");
+                    System.out.println("\n❌ Invalid option.");
             }
             
         } while (choice != 7);

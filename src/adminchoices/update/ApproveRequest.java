@@ -46,7 +46,7 @@ public class ApproveRequest {
                     
                     String updatePet = 
                             "UPDATE pets "
-                            + "SET adoption_status = 'Not Available', "
+                            + "SET adoption_status = 'Adopted', "
                             + "archived = 1, "
                             + "user_id = ? "
                             + "WHERE pet_id = ?";

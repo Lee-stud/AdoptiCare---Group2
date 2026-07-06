@@ -64,7 +64,7 @@ public class SearchPet {
 
                 } while (rs.next());
 
-                System.out.println("\nEnter Pet ID to view details: ");
+                System.out.println("\nEnter Pet ID to see more details: ");
                 int petId = input.nextInt();
 
                 ViewPetDetails.viewPetDetails(petId);

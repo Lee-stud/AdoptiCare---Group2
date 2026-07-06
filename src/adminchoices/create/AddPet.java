@@ -13,27 +13,82 @@ public class AddPet {
     public static void addPet() {
 
         try {
-            System.out.print("Pet Name: ");
-            String name = input.nextLine();
+            System.out.println("\n🐾 ===== ADD NEW PET =====");
 
-            System.out.print("Gender: ");
-            String gender = input.nextLine();
-            
-            System.out.print("Age: ");
-            int age = input.nextInt();
-            input.nextLine();
+            String name, gender;
+            int age;
 
+            while (true) {
+
+                //============
+                //PET NAME
+                //============
+                System.out.print("🐶 Pet Name: ");
+                name = input.nextLine().trim();
+
+                if (name.isEmpty()) {
+                    System.out.println("\n❌ Pet name cannot be empty!\n");
+                    continue;
+                }
+
+                //============
+                //GENDER
+                //============
+                System.out.print("⚧ Gender (Male/Female): ");
+                gender = input.nextLine().trim();
+
+                if (gender.isEmpty()) {
+                    System.out.println("\n❌ Gender cannot be empty!\n");
+                    continue;
+                }
+
+                //===========
+                //AGE
+                //===========
+                System.out.print("🎂 Age: ");
+
+                if (!input.hasNextInt()) {
+                    System.out.println("\n❌ Invalid age input!\n");
+                    input.nextLine();
+                    continue;
+                }
+
+                age = input.nextInt();
+                input.nextLine();
+
+                if (age < 0 || age > 30) {
+                    System.out.println("\n❌ Invalid age range!\n");
+                    continue;
+                }
+
+                break;
+
+            }
+
+            //=============
+            //SPECIES
+            //=============
             System.out.print("Species: ");
-            String species = input.nextLine();
+            String species = input.nextLine().trim();
 
+            //============
+            //BREED
+            //============
             System.out.print("Breed: ");
-            String breed = input.nextLine();
-            
+            String breed = input.nextLine().trim();
+
+            //============
+            //DESCRIPTION
+            //============
             System.out.print("Description: ");
-            String description = input.nextLine();
-            
+            String description = input.nextLine().trim();
+
             Connection con = DbConnection.getConnection();
 
+            
+            //=============
+            //INSERT QUERY
+            //=============
             String sql
                     = "INSERT INTO pets "
                     + "(pet_name, gender, age, species, breed, description, adoption_status, date_added) "
@@ -47,17 +102,17 @@ public class AddPet {
             pst.setString(4, species);
             pst.setString(5, breed);
             pst.setString(6, description);
-            
+
             int rows = pst.executeUpdate();
 
             if (rows > 0) {
-                System.out.println("\nPet Added Successfully!");
+                System.out.println("\n✅ Pet Added Successfully!");
             } else {
-                System.out.println("\nPet Added Failed.");
+                System.out.println("\n❌ Failed to Add Pet.");
             }
 
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println("❌ Error: " + e.getMessage());
         }
     }
 }

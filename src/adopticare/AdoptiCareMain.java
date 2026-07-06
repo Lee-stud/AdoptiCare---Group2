@@ -13,15 +13,15 @@ public class AdoptiCareMain {
         int choice;
 
         do {
-            System.out.println("\n===== ADOPTICARE =====");
+            System.out.println("\n🏡 Welcome to AdoptiCare! 🐶🐱 ");
 
-            System.out.println("1. Customer Login");
-            System.out.println("2. Admin Login");
-            System.out.println("3. Veterinarian Login");
-            System.out.println("4. Register");
-            System.out.println("5. Exit");
+            System.out.println("[1] 👤 Customer Login");
+            System.out.println("[2] 👑 Admin Login");
+            System.out.println("[3] 👨‍⚕ Veterinarian Login");
+            System.out.println("[4] 📝 Register");
+            System.out.println("[5] ⏻ Exit");
 
-            System.out.print("Choose: ");
+            System.out.print("\n👉 Choose an option [1-5]: ");
             choice = input.nextInt();
             input.nextLine();
 
@@ -44,7 +44,7 @@ public class AdoptiCareMain {
                     break;
 
                 case 5:
-                    System.out.println("Thank you for using AdoptiCare!");
+                    System.out.println("\n🏡 Thank you for using AdoptiCare! 🐶🐱");
                     break;
 
                 default:

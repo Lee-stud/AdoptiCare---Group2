@@ -7,6 +7,9 @@ import org.mindrot.jbcrypt.BCrypt;
 
 public class Login {
 
+    //=============================================
+    //BEFORE LOGIN (WHEN THE USER IS NOT LOGIN YET)
+    //=============================================
     public static int loggedInUserId = -1;
 
     public static String login() {
@@ -23,21 +26,21 @@ public class Login {
             //=====================
             while (true) {
 
-                System.out.print("Username: ");
+                System.out.print("👤 Username: ");
                 username = input.nextLine();
 
                 if (username.isEmpty()) {
-                    System.out.println("Username cannot be empty!");
+                    System.out.println("⚠ Username cannot be empty!");
                     continue;
                 }
 
                 if (username.contains(" ")) {
-                    System.out.println("Username cannot contain spaces, use special characters(_).");
+                    System.out.println("⚠ Username cannot contain spaces, use special characters(_).");
                     continue;
                 }
 
                 if (username.length() < 4) {
-                    System.out.println("Username must be atleast 4 or more than letters!");
+                    System.out.println("⚠ Username must be atleast 4 or more than letters!");
                     continue;
                 }
 
@@ -49,21 +52,21 @@ public class Login {
             //=========================
             while (true) {
 
-                System.out.print("Password: ");
+                System.out.print("🔒 Password: ");
                 password = input.nextLine();
 
-                if (username.isEmpty()) {
-                    System.out.println("Password cannot be empty!");
+                if (password.isEmpty()) {
+                    System.out.println("⚠ Password cannot be empty!");
                     continue;
                 }
 
-                if (username.contains(" ")) {
-                    System.out.println("Password cannot contain spaces, use special characters(_).");
+                if (password.contains(" ")) {
+                    System.out.println("⚠ Password cannot contain spaces, use special characters(_).");
                     continue;
                 }
 
-                if (username.length() < 8) {
-                    System.out.println("Password must be atleast 8 or more than letters!");
+                if (password.length() < 8) {
+                    System.out.println("⚠ Password must be atleast 8 or more than characters!");
                     continue;
                 }
                 
@@ -84,22 +87,28 @@ public class Login {
 
                 String hashedPassword = rs.getString("password");
 
+                //======================
+                //CHECKING HASH PASSWORD
+                //======================
                 if (BCrypt.checkpw(password, hashedPassword)) {
+                    //===================================
+                    //USERS ALREADY LOGIN (WITH THEIR ID)
+                    //===================================
                     loggedInUserId = rs.getInt("user_id");
 
-                    System.out.println("Login Successful!");
+                    System.out.println("\n✅ Login Successful!");
 
                     return rs.getString("role");
                 } else {
-                    System.out.println("Incorrect Password");
+                    System.out.println("\n❌ Incorrect Password");
                 }
 
             } else {
-                System.out.println("Username not found.");
+                System.out.println("\n👤❌ Username not found.");
             }
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("❌ Error: " + e.getMessage());
         }
 
         return null;

@@ -23,7 +23,7 @@ public class AdminLogin {
             //=====================
             while (true) {
 
-                System.out.print("Username: ");
+                System.out.print("👤 Username: ");
                 username = input.nextLine();
 
                 if (username.isEmpty()) {
@@ -49,20 +49,20 @@ public class AdminLogin {
             //=========================
             while (true) {
 
-                System.out.print("Password: ");
+                System.out.print("🔒 Password: ");
                 password = input.nextLine();
 
-                if (username.isEmpty()) {
+                if (password.isEmpty()) {
                     System.out.println("Password cannot be empty!");
                     continue;
                 }
 
-                if (username.contains(" ")) {
+                if (password.contains(" ")) {
                     System.out.println("Password cannot contain spaces, use special characters(_).");
                     continue;
                 }
 
-                if (username.length() < 8) {
+                if (password.length() < 8) {
                     System.out.println("Password must be atleast 8 or more than letters!");
                     continue;
                 }

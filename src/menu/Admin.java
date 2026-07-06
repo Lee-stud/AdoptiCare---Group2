@@ -1,7 +1,6 @@
 package menu;
 
 import adminchoices.delete.DeletePet;
-import adminchoices.update.ApproveRequest;
 import adminchoices.update.ArchivePet;
 import adminchoices.update.UpdatePet;
 import adminchoices.read.ViewRequests;
@@ -17,25 +16,26 @@ public class Admin {
 
     public static void adminMenu() {
 
-        System.out.println("\nWelcome Administrator!");
+        System.out.println("\n🏡 Welcome to AdoptiCare, Administrator! 🐾");
 
         int choice;
 
         do {
-            System.out.println("\n===== ADMIN MENU =====");
+            System.out.println("\n===== 👑 ADMIN MENU =====");
 
-            System.out.println("1. Add Pet");
-            System.out.println("2. View All Pets");
-            System.out.println("3. Update Pet");
-            System.out.println("4. Delete Pet");
-            System.out.println("5. Search Pet");
-            System.out.println("6. Archive Pet");
-            System.out.println("7. View Archived Pets");
-            System.out.println("8. View Adoption Requests");
-            System.out.println("10. Logout");
+            System.out.println("[1] ➕ Add Pet");
+            System.out.println("[2] 🐾 View All Pets");
+            System.out.println("[3] ✏ Update Pet");
+            System.out.println("[4] 🗑 Delete Pet");
+            System.out.println("[5] 🔍 Search Pet");
+            System.out.println("[6] 📦 Archive Pet");
+            System.out.println("[7] 🗄 View Archived Pets");
+            System.out.println("[8] 📋 View Adoption Requests");
+            System.out.println("[9] ⏻ Logout");
             
-            System.out.print("\nChoose: ");
+            System.out.print("\n👉 Choose an option [1-9]: ");
             choice = input.nextInt();
+            
             input.nextLine();
 
             switch (choice) {
@@ -71,14 +71,14 @@ public class Admin {
                     ViewRequests.viewRequests();
                     break;
                     
-                case 10:
-                    System.out.println("Logging out...");
+                case 9:
+                    System.out.println("✅ Logout Successfully!");
                     break;
 
                 default:
-                    System.out.println("Invalid choice.");
+                    System.out.println("❌ Invalid option.");
             }
 
-        } while (choice != 10);
+        } while (choice != 9);
     }
 }
