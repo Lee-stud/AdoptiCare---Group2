@@ -17,7 +17,7 @@ public class Login {
         Scanner input = new Scanner(System.in);
 
         try {
-            System.out.println("\n===== LOGIN =====");
+            System.out.println("\n===== 👤 CUSTOMER LOGIN =====");
 
             String username, password;
 
@@ -30,17 +30,17 @@ public class Login {
                 username = input.nextLine();
 
                 if (username.isEmpty()) {
-                    System.out.println("⚠ Username cannot be empty!");
+                    System.out.println("\n⚠ Username cannot be empty!\n");
                     continue;
                 }
 
                 if (username.contains(" ")) {
-                    System.out.println("⚠ Username cannot contain spaces, use special characters(_).");
+                    System.out.println("\n⚠ Username cannot contain spaces, use special characters(_).\n");
                     continue;
                 }
 
                 if (username.length() < 4) {
-                    System.out.println("⚠ Username must be atleast 4 or more than letters!");
+                    System.out.println("\n⚠ Username must be atleast 4 or more than letters!\n");
                     continue;
                 }
 
@@ -56,17 +56,17 @@ public class Login {
                 password = input.nextLine();
 
                 if (password.isEmpty()) {
-                    System.out.println("⚠ Password cannot be empty!");
+                    System.out.println("\n⚠ Password cannot be empty!\n");
                     continue;
                 }
 
                 if (password.contains(" ")) {
-                    System.out.println("⚠ Password cannot contain spaces, use special characters(_).");
+                    System.out.println("\n⚠ Password cannot contain spaces, use special characters(_).\n");
                     continue;
                 }
 
                 if (password.length() < 8) {
-                    System.out.println("⚠ Password must be atleast 8 or more than characters!");
+                    System.out.println("\n⚠ Password must be atleast 8 or more than characters!\n");
                     continue;
                 }
                 
@@ -108,7 +108,7 @@ public class Login {
             }
 
         } catch (SQLException e) {
-            System.out.println("❌ Error: " + e.getMessage());
+            System.out.println("\n❌ Error: " + e.getMessage());
         }
 
         return null;

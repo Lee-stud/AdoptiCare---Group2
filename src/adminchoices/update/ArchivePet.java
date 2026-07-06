@@ -71,7 +71,7 @@ public class ArchivePet {
 
         try {
 
-            System.out.print("Enter Pet ID: ");
+            System.out.print("\n👉 Enter Pet ID: ");
             int petId = input.nextInt();
 
             input.nextLine();

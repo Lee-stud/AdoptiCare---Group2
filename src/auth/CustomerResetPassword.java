@@ -17,12 +17,12 @@ public class CustomerResetPassword {
         try {
             Connection con = DbConnection.getConnection();
             
-            System.out.println("\n===== RESET PASSWORD =====");
+            System.out.println("\n===== 🔐 RESET PASSWORD =====");
 
             int userId = Login.loggedInUserId;
 
             if (userId == -1) {
-                System.out.println("You are not logged in!");
+                System.out.println("\n⚠ You are not logged in!");
                 return;
             }
 
@@ -40,7 +40,7 @@ public class CustomerResetPassword {
             ResultSet rs = pst.executeQuery();
             
             if(!rs.next()) {
-                System.out.println("User not found!");
+                System.out.println("\n❌ User not found!");
                 return;
             }
             
@@ -56,21 +56,21 @@ public class CustomerResetPassword {
             //VERIFY CURRENT PASSWORD
             //=======================
             if(!BCrypt.checkpw(currentPassword, storedHashedPassword)) {
-                System.out.println("Invalid password: Your password does not match the current password!");
+                System.out.println("\n❌ Invalid password: Your password does not match the current password!");
                 return;
             }
             
             //==================
             //INPUT NEW PASSWORD
             //==================
-            System.out.print("Enter new password: ");
+            System.out.print("🆕 Enter new password: ");
             String newPassword = input.nextLine();
             
-            System.out.println("Confirm new password: ");
+            System.out.print("🔁 Confirm new password: ");
             String confirmPassword = input.nextLine();
             
             if(!newPassword.equals(confirmPassword)) {
-                System.out.println("Password does not match!");
+                System.out.println("\n❌ Password does not match!");
                 return;
             }
             
@@ -94,13 +94,13 @@ public class CustomerResetPassword {
             int updated = updatePst.executeUpdate();
             
             if(updated > 0) {
-                System.out.println("Password successfully changed!");
+                System.out.println("\n✅ Password successfully changed!");
             } else {
-                System.out.println("Failed to update password.");
+                System.out.println("\n❌ Failed to update password.");
             }
             
         } catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("\n❌ Error: " + e.getMessage());
         }
     }
 }

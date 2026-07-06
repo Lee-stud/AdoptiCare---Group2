@@ -14,7 +14,7 @@ public class AdminLogin {
         Scanner input = new Scanner(System.in);
 
         try {
-            System.out.println("\n===== LOGIN =====");
+            System.out.println("\n===== 👨‍💼 ADMIN LOGIN =====");
 
             String username, password;
             
@@ -27,17 +27,17 @@ public class AdminLogin {
                 username = input.nextLine();
 
                 if (username.isEmpty()) {
-                    System.out.println("Username cannot be empty!");
+                    System.out.println("\n⚠Username cannot be empty!");
                     continue;
                 }
 
                 if (username.contains(" ")) {
-                    System.out.println("Username cannot contain spaces, use special characters(_).");
+                    System.out.println("⚠Username cannot contain spaces, use special characters(_).");
                     continue;
                 }
 
                 if (username.length() < 4) {
-                    System.out.println("Username must be atleast 4 or more than letters!");
+                    System.out.println("⚠Username must be atleast 4 or more than letters!");
                     continue;
                 }
 
@@ -53,17 +53,17 @@ public class AdminLogin {
                 password = input.nextLine();
 
                 if (password.isEmpty()) {
-                    System.out.println("Password cannot be empty!");
+                    System.out.println("\n⚠ Password cannot be empty!\n");
                     continue;
                 }
 
                 if (password.contains(" ")) {
-                    System.out.println("Password cannot contain spaces, use special characters(_).");
+                    System.out.println("\n⚠ Password cannot contain spaces, use special characters(_).\n");
                     continue;
                 }
 
                 if (password.length() < 8) {
-                    System.out.println("Password must be atleast 8 or more than letters!");
+                    System.out.println("\nPassword must be atleast 8 or more than letters!\n");
                     continue;
                 }
 
@@ -83,11 +83,11 @@ public class AdminLogin {
 
             if (rs.next()) {
 
-                System.out.println("Login Successfully!");
+                System.out.println("\n✅ Login Successfully!");
 
                 return rs.getString("role");
             } else {
-                System.out.println("Incorrect username or password.");
+                System.out.println("\n❌ Incorrect username or password.");
             }
         } catch (Exception e) {
             System.out.println(e);

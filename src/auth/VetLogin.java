@@ -13,7 +13,7 @@ public class VetLogin {
         Scanner input = new Scanner(System.in);
 
         try {
-            System.out.println("\n===== 🔑 LOGIN =====");
+            System.out.println("\n===== 👨‍⚕ VETERINARIAN LOGIN =====");
 
             String username, password;
 
