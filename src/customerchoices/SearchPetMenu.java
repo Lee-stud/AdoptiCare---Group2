@@ -1,4 +1,4 @@
-package adminchoices.read;
+package customerchoices;
 
 import database.DbConnection;
 import java.sql.Connection;
@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class SearchPet {
+public class SearchPetMenu {
 
     //================
     //SEARCH PET MENU
@@ -116,7 +116,22 @@ public class SearchPet {
                     System.out.println("--------------------------------------------------------------------------------");
 
                 } while (rs.next());
-                
+
+                System.out.print("\n🆔 Enter Pet ID to see more details (press 0 to cancel): ");
+
+                if (!input.hasNextInt()) {
+                    System.out.println("\n❌ Invalid input. Returning to menu...");
+                    return;
+                }
+
+                int petId = input.nextInt();
+
+                if (petId == 0) {
+                    System.out.println("\n↩ Returning to menu...");
+                    return;
+                }
+
+                ViewPetDetails.viewPetDetails(petId);
             } else {
                 System.out.println("\n❌ Pet not found.");
             }
@@ -184,6 +199,21 @@ public class SearchPet {
 
                 } while (rs.next());
 
+                System.out.print("\n🆔 Enter Pet ID to see more details (press 0 to cancel): ");
+
+                if (!input.hasNextInt()) {
+                    System.out.println("❌ Invalid input. Returning to menu...");
+                    return;
+                }
+
+                int petId = input.nextInt();
+
+                if (petId == 0) {
+                    System.out.println("↩ Returning to menu...");
+                    return;
+                }
+
+                ViewPetDetails.viewPetDetails(petId);
             } else {
                 System.out.println("\n❌ Pet not found.");
             }
@@ -250,13 +280,28 @@ public class SearchPet {
                     System.out.println("--------------------------------------------------------------------------------");
 
                 } while (rs.next());
-                
+
+                System.out.print("\n🆔 Enter Pet ID to see more details (press 0 to cancel): ");
+
+                if (!input.hasNextInt()) {
+                    System.out.println("❌ Invalid input. Returning to menu...");
+                    return;
+                }
+
+                int petId = input.nextInt();
+
+                if (petId == 0) {
+                    System.out.println("↩ Returning to menu...");
+                    return;
+                }
+
+                ViewPetDetails.viewPetDetails(petId);
             } else {
                 System.out.println("\n❌ Pet not found.");
             }
 
         } catch (SQLException e) {
-            System.out.println("\n❌ Error: " + e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 }

@@ -20,7 +20,7 @@ public class SearchArchivedPet {
             while (true) {
                 System.out.println("\n===== 🔍 SEARCH ARCHIVED PET =====");
 
-                System.out.print("👉 Enter Pet ID (0 to return): ");
+                System.out.print("🆔 Enter Pet ID (0 to return): ");
 
                 if (!input.hasNextInt()) {
                     System.out.println("\n❌ Invalid input: Please enter a number.\n");
@@ -48,7 +48,7 @@ public class SearchArchivedPet {
                 ResultSet rs = pst.executeQuery();
 
                 if (rs.next()) {
-                    System.out.println("\n🗄️ Archived Pet Details");
+                    System.out.println("\n🗄 Archived Pet Details");
                     System.out.println("--------------------------------------------------------------------------------");
 
                     System.out.printf("%-5s %-15s %-8s %-5s %-12s %-15s %-25s %-15s%n",

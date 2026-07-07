@@ -26,7 +26,7 @@ public class ViewArchivedPets {
 
             if (!rs.next()) {
                 System.out.println("ℹ No archived pets found.");
-                System.out.println("\nPress Enter to return to the Admin Menu...");
+                System.out.println("\nPress [Enter] to return to the Admin Menu...");
                 input.nextLine();
                 con.close();
                 return;

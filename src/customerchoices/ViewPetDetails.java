@@ -15,14 +15,14 @@ public class ViewPetDetails {
 
         try {
 
-            System.out.println("\n===== PET DETAILS =====");
+            System.out.println("\n===== 🐾 PET DETAILS =====");
 
             Connection con = DbConnection.getConnection();
 
             String queryDetails
                     = "SELECT p.*, pm.vaccine_name, pm.health_condition, "
                     + "pm.last_vaccination_date, pm.next_vaccination_schedule, "
-                    + "pm.vaccination_status "
+                    + "pm.vaccination_status, pm.diet, pm.vitamins "
                     + "FROM pets p "
                     + "LEFT JOIN pet_medical_records pm "
                     + "ON p.pet_id = pm.pet_id "
@@ -31,6 +31,12 @@ public class ViewPetDetails {
             Statement st = con.createStatement();
 
             ResultSet rs = st.executeQuery(queryDetails);
+            
+            
+            //====================
+            // PET DETAILS COLUMN
+            //====================
+            System.out.println("-----------------------------------------------------------------------------------------------");
 
             System.out.printf(
                     "%-5s %-15s %-10s %-5s %-8s %-25s %-40s%n",
@@ -43,6 +49,9 @@ public class ViewPetDetails {
                     "Description"
             );
 
+            //=====================
+            // PET DETAILS VALUE
+            //=====================
             System.out.println("-----------------------------------------------------------------------------------------------");
 
             if (rs.next()) {
@@ -59,7 +68,10 @@ public class ViewPetDetails {
                 );
 
                 System.out.println("--------------------------------------------------------------------------------------------------------------------------------------");
-
+                
+                //============================
+                // PET MEDICAL RECORD COLUMN
+                //============================
                 System.out.println("\n===== " + rs.getString("pet_name") + " MEDICAL RECORD =====\n");
 
                 System.out.printf(
@@ -90,7 +102,7 @@ public class ViewPetDetails {
 
                 } while (rs.next());
             } else {
-                System.out.println("Pet not found.");
+                System.out.println("\n❌ Pet not found.");
             }
 
         } catch (SQLException e) {

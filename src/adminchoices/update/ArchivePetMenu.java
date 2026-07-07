@@ -4,8 +4,9 @@ import adminchoices.read.ViewArchivedPets;
 import java.util.Scanner;
 import java.sql.*;
 import database.DbConnection;
+import menu.Admin;
 
-public class ArchivePet {
+public class ArchivePetMenu {
 
     static Scanner input = new Scanner(System.in);
 
@@ -22,7 +23,7 @@ public class ArchivePet {
             System.out.println("[4] 🔍 Search Archived Pet");
             System.out.println("[5] ↩ Return to Admin Menu");
             
-            System.out.println("\n👉 Choose an Option [1-5]: ");
+            System.out.print("\n👉 Choose an Option [1-5]: ");
             
             int choice;
             
@@ -55,6 +56,7 @@ public class ArchivePet {
                     break;
                     
                 case 5:
+                    Admin.adminMenu();
                     System.out.println("\n↩ Returning to Admin Menu...");
                     break;
                     
@@ -79,9 +81,9 @@ public class ArchivePet {
             Connection con = DbConnection.getConnection();
 
             String sql
-                    = "UPDATE pets"
+                    = "UPDATE pets "
                     + "SET archived = 1 "
-                    + "WHERE pet_id = ?;";
+                    + "WHERE pet_id = ?";
 
             PreparedStatement pst = con.prepareStatement(sql);
 
@@ -90,15 +92,15 @@ public class ArchivePet {
             int rows = pst.executeUpdate();
 
             if (rows > 0) {
-                System.out.println("Pet archived.");
+                System.out.println("\nPet archived.");
             } else {
-                System.out.println("Archive failed.");
+                System.out.println("\nArchive failed.");
             }
 
             con.close();
 
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (SQLException e) {
+            System.out.println("\nError: " + e.getMessage());
         }
     }
 }

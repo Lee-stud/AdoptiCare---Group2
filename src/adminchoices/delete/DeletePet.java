@@ -25,7 +25,7 @@ public class DeletePet {
             //==============================
             while (true) {
 
-                System.out.print("👉 Enter Pet ID: ");
+                System.out.print("🆔 Enter Pet ID: ");
 
                 if (!input.hasNextInt()) {
                     System.out.println("\n❌ Invalid input: Pet ID must be a number.\n");
@@ -75,7 +75,7 @@ public class DeletePet {
                 //CONFIRMATION
                 //===================
                 System.out.println("\n⚠ You are about to delete: " + petName);
-                System.out.println("Are you sure? (Y/N): ");
+                System.out.print("Are you sure? (Y/N): ");
                 confirm = input.nextLine().trim();
 
                 if (confirm.equalsIgnoreCase("Y")) {

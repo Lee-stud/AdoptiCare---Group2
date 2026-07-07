@@ -25,9 +25,11 @@ public class ViewAvailablePets {
             Statement st = con.createStatement();
 
             ResultSet rs = st.executeQuery(sql);
+            
+            System.out.println("--------------------------------------------------------------------------------");
 
             System.out.printf(
-                    "%-8s %-15s %-8s %-5s %-12s %-15s %-25s %-15s%n",
+                    "| %-8s | %-15s | %-8s | %-5s | %-12s | %-15s | %-25s | %-15s%n |",
                     "Pet ID",
                     "Pet Name",
                     "Gender",
@@ -45,39 +47,38 @@ public class ViewAvailablePets {
                 return;
             }
 
-                do {
+            do {
 
-                    System.out.printf(
-                            "%-8d %-15s %-8s %-5d %-12s %-15s %-25s %-15s%n",
-                            rs.getInt("pet_id"),
-                            rs.getString("pet_name"),
-                            rs.getString("gender"),
-                            rs.getInt("age"),
-                            rs.getString("species"),
-                            rs.getString("breed"),
-                            rs.getString("description"),
-                            rs.getString("adoption_status")
-                    );
+                System.out.printf(
+                        "| %-8d | %-15s | %-8s | %-5d | %-12s | %-15s | %-25s | %-15s%n |",
+                        rs.getInt("pet_id"),
+                        rs.getString("pet_name"),
+                        rs.getString("gender"),
+                        rs.getInt("age"),
+                        rs.getString("species"),
+                        rs.getString("breed"),
+                        rs.getString("description"),
+                        rs.getString("adoption_status")
+                );
 
-                    System.out.println("--------------------------------------------------------------------------------");
-                } while (rs.next());
+                System.out.println("--------------------------------------------------------------------------------");
+            } while (rs.next());
 
-                System.out.print("\n👉 Enter Pet ID to see more details (press 0 to cancel): ");
-                
-                if(!input.hasNextInt()) {
-                    System.out.println("❌ Invalid input. Returning to menu...");
-                    return;
-                }
-                
-                int petId = input.nextInt();
+            System.out.print("\n🆔 Enter Pet ID to see more details (press 0 to cancel): ");
 
-                if (petId == 0) {
-                    System.out.println("↩ Returning to menu...");
-                    return;
-                }
-                
-                ViewPetDetails.viewPetDetails(petId);
-            
+            if (!input.hasNextInt()) {
+                System.out.println("❌ Invalid input. Returning to menu...");
+                return;
+            }
+
+            int petId = input.nextInt();
+
+            if (petId == 0) {
+                System.out.println("↩ Returning to menu...");
+                return;
+            }
+
+            ViewPetDetails.viewPetDetails(petId);
 
         } catch (SQLException e) {
             System.out.println("❌ Error: " + e.getMessage());

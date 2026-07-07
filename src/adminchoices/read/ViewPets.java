@@ -15,7 +15,7 @@ public class ViewPets {
 
             ResultSet rs = st.executeQuery(sql);
 
-            System.out.println("\n===== PET LIST =====");
+            System.out.println("\n===== 🐾 PET LIST =====");
 
             System.out.printf(
                     "%-5s %-15s %-12s %-18s %-5s %-35s %-15s%n",

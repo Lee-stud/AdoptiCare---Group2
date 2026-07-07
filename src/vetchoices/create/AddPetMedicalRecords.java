@@ -14,22 +14,27 @@ public class AddPetMedicalRecords {
         Scanner input = new Scanner(System.in);
 
         try {
+            
+            System.out.println("\n===== ADD PET MEDICAL RECORDS =====");
 
-            System.out.print("\nPet ID: ");
+            System.out.print("\n🆔 Enter Pet ID: ");
             int petId = input.nextInt();
 
             input.nextLine();
             
             Connection con = DbConnection.getConnection();
 
-            String sql = "INSERT INTO vaccinations "
-                    + "(pet_id, vaccine_name, last_vaccination_date, next_vaccination_schedule, vaccination_status, diet, vitamins) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO pet_medical_records "
+                    + "(pet_id, vaccine_name, health_condition, last_vaccination_date, next_vaccination_schedule, vaccination_status, diet, vitamins) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement pst = con.prepareStatement(sql);
             
             while (true) {
 
+                //========================
+                // MULTIPLE ADD METHOD
+                //========================
                 System.out.print("\nVaccine Name (type 'done' to finish): ");
                 String vaccineName = input.nextLine();
 
@@ -66,7 +71,7 @@ public class AddPetMedicalRecords {
 
                 pst.executeUpdate();
 
-                System.out.println("✓ Vaccine added successfully.");
+                System.out.println("\n✓ Vaccine added successfully.");
             }
 
             System.out.println("\nAll vaccination records saved.");

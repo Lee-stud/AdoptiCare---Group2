@@ -15,7 +15,7 @@ public class SubmitAdoptionRequest {
         
         try {
             
-            System.out.print("Enter Pet ID: ");
+            System.out.print("🆔 Enter Pet ID: ");
             int petId = input.nextInt();
 
             input.nextLine();
@@ -35,7 +35,7 @@ public class SubmitAdoptionRequest {
             int rows = pst.executeUpdate();
             
             if (rows > 0) {
-                System.out.println("Adoption request submitted.");
+                System.out.println("\n✅ Adoption request submitted.");
             }
             
             con.close();

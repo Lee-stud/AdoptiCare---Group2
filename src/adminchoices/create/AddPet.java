@@ -68,19 +68,19 @@ public class AddPet {
             //=============
             //SPECIES
             //=============
-            System.out.print("Species: ");
+            System.out.print("🐕 Species: ");
             String species = input.nextLine().trim();
 
             //============
             //BREED
             //============
-            System.out.print("Breed: ");
+            System.out.print("🏷 Breed: ");
             String breed = input.nextLine().trim();
 
             //============
             //DESCRIPTION
             //============
-            System.out.print("Description: ");
+            System.out.print("📝 Description: ");
             String description = input.nextLine().trim();
 
             Connection con = DbConnection.getConnection();

@@ -18,7 +18,7 @@ public class ViewPets {
 
             ResultSet rs = st.executeQuery(sql);
 
-            System.out.println("\n===== PET LIST =====");
+            System.out.println("\n===== 🐾 PET LIST =====");
 
             System.out.printf("%-5s %-15s %-12s %-20s %-5s %-30s %-15s%n,",
                     "ID", "Pet Name", "Species", "Breed", "Age", "Description", "Adoption Status");
@@ -37,12 +37,14 @@ public class ViewPets {
                         rs.getString("adoption_status"));
 
                 System.out.println("-------------------------------------------------------------------------------------------------");
+                
             }
 
             con.close();
             rs.close();
+            
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("\n❌ Error: " + e.getMessage());
         }
     }
 }

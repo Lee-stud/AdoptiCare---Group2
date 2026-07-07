@@ -27,11 +27,11 @@ public class RejectRequest {
             int rows = pst.executeUpdate();
 
             if (rows > 0) {
-                System.out.println("Adoption request rejected.");
+                System.out.println("\n✅ Adoption request rejected.");
             }
 
         } catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("\n❌ Error: " + e.getMessage());
         }
     }
 }

@@ -32,7 +32,9 @@ public class ViewRequestStatus {
 
             ResultSet rs = pst.executeQuery();
 
-            System.out.printf("\n===== REQUEST STATUS =====\n\n");
+            System.out.printf("\n===== 📄 REQUEST STATUS =====\n");
+            
+            System.out.println("--------------------------------------------------------------------------------");
 
             System.out.printf("%-12s %-15s %-25s %-10s %-25s %-15s%n",
                     "Request ID",
@@ -61,7 +63,7 @@ public class ViewRequestStatus {
 
                 } while (rs.next());
             } else {
-                System.out.println("\nYou have no adoption requests.");
+                System.out.println("\n❌ You have no adoption requests.");
             }
 
         } catch (SQLException e) {
