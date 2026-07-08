@@ -1,8 +1,11 @@
 package adminchoices.update;
 
 import database.DbConnection;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Scanner;
+import static util.ShowPetList.showPetList;
 
 public class UpdatePet {
 
@@ -17,7 +20,7 @@ public class UpdatePet {
 
         do {
             System.out.println("\n✏ ===== UPDATE PET MENU =====");
-            System.out.println("\n👉 Which pet details would you like to update?");
+            System.out.println("\n⚙ Which pet details would you like to update?");
 
             System.out.println("[1] 🐾 Update All Pet Details");
             System.out.println("[2] 🐶 Update Pet Name");
@@ -64,7 +67,7 @@ public class UpdatePet {
                     break;
 
                 case 8:
-                    System.out.println("👉 Going back...");
+                    System.out.println("\n↩ Going back...");
                     break;
 
                 default:
@@ -80,14 +83,22 @@ public class UpdatePet {
     public static void updatePet() {
         // switch cases
 
-        System.out.println("\n===== UPDATE PET DETAILS =====");
-
         try {
 
-            System.out.print("🆔 Enter Pet ID: ");
+            Connection con = DbConnection.getConnection();
+
+            showPetList(con);
+            System.out.println("\n===== 🐾 UPDATE PET DETAILS =====");
+
+            System.out.print("🆔 Enter Pet ID (press [0] to cancel): ");
             int petId = input.nextInt();
 
             input.nextLine();
+            
+            if(petId == 0) {
+                System.out.println("↩ Returning to Admin Menu...");
+                return;
+            }
 
             System.out.print("🐶 New Pet Name: ");
             String petName = input.nextLine();
@@ -95,11 +106,48 @@ public class UpdatePet {
             System.out.print("⚧ New Gender: ");
             String gender = input.nextLine();
 
-            System.out.print("🎂 New Age: ");
-            int age = input.nextInt();
+            System.out.println("\n========== AGE LEGEND ==========");
+            System.out.println("0.08 = 1 Month");
+            System.out.println("0.17 = 2 Months");
+            System.out.println("0.25 = 3 Months");
+            System.out.println("0.33 = 4 Months");
+            System.out.println("0.42 = 5 Months");
+            System.out.println("0.50 = 6 Months");
+            System.out.println("0.58 = 7 Months");
+            System.out.println("0.67 = 8 Months");
+            System.out.println("0.75 = 9 Months");
+            System.out.println("0.83 = 10 Months");
+            System.out.println("0.92 = 11 Months");
+            System.out.println("1.00 = 1 Year");
+            System.out.println("1.25 = 1 Year 3 Months");
+            System.out.println("1.50 = 1 Year 6 Months");
+            System.out.println("===============================\n");
 
-            input.nextLine();
- 
+            System.out.println("Enter the pet's age in decimal format based on the legend above.\n"
+                    + "Example: 0.50 = 6 Months, 1.25 = 1 Year 3 Months.");
+
+            System.out.print("🎂 New Age [0-30]: ");
+            double age;
+
+            while (true) {
+
+                if (!input.hasNextDouble()) {
+                    System.out.println("\n⚠ Invalid input: Input must be numerical.\n");
+                    continue;
+                }
+
+                age = input.nextDouble();
+
+                input.nextLine();
+
+                if (age < 0 || age > 30) {
+                    System.out.println("\n⚠ Invalid input: Age must be between 0 to 30.\n");
+                    continue;
+                }
+
+                break;
+            }
+
             System.out.print("🐕 New Species: ");
             String species = input.nextLine();
 
@@ -108,8 +156,6 @@ public class UpdatePet {
 
             System.out.print("📝 New Description: ");
             String desc = input.nextLine();
-
-            Connection con = DbConnection.getConnection();
 
             String queryPet
                     = "UPDATE pets"
@@ -125,7 +171,7 @@ public class UpdatePet {
 
             pst.setString(1, petName);
             pst.setString(2, gender);
-            pst.setInt(3, age);
+            pst.setDouble(3, age);
             pst.setString(4, species);
             pst.setString(5, breed);
             pst.setString(6, desc);
@@ -142,7 +188,7 @@ public class UpdatePet {
             con.close();
 
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println("\n❌ Error: " + e.getMessage());
         }
     }
 
@@ -152,18 +198,24 @@ public class UpdatePet {
     public static void updatePetName() {
 
         try {
+            Connection con = DbConnection.getConnection();
 
-            System.out.println("\n===== UPDATE PET NAME =====");
+            showPetList(con);
 
-            System.out.print("🆔 Enter Pet ID: ");
+            System.out.println("\n===== 🐶 UPDATE PET NAME =====");
+
+            System.out.print("🆔 Enter Pet ID (press [0] to cancel): ");
             int petId = input.nextInt();
 
             input.nextLine();
+            
+            if(petId == 0) {
+                System.out.println("↩ Returning to Admin Menu...");
+                return;
+            }
 
             System.out.print("🐶 New Pet Name: ");
             String petName = input.nextLine();
-
-            Connection con = DbConnection.getConnection();
 
             String queryName
                     = "UPDATE pets "
@@ -184,7 +236,7 @@ public class UpdatePet {
             }
 
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println("\n❌ Error: " + e.getMessage());
         }
     }
 
@@ -194,18 +246,24 @@ public class UpdatePet {
     public static void updatePetGender() {
 
         try {
+            Connection con = DbConnection.getConnection();
 
-            System.out.println("\n===== UPDATE PET GENDER =====");
+            showPetList(con);
 
-            System.out.print("🆔 Enter Pet ID: ");
+            System.out.println("\n===== ⚧ UPDATE PET GENDER =====");
+
+            System.out.print("🆔 Enter Pet ID (press [0] to cancel): ");
             int petId = input.nextInt();
 
             input.nextLine();
+            
+            if(petId == 0) {
+                System.out.println("↩ Returning to Admin Menu...");
+                return;
+            }
 
             System.out.print(" ⚧ New Gender: ");
             String gender = input.nextLine();
-
-            Connection con = DbConnection.getConnection();
 
             String queryName
                     = "UPDATE pets "
@@ -226,7 +284,7 @@ public class UpdatePet {
             }
 
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println("\n❌ Error: " + e.getMessage());
         }
     }
 
@@ -236,18 +294,63 @@ public class UpdatePet {
     public static void updatePetAge() {
 
         try {
+            Connection con = DbConnection.getConnection();
 
-            System.out.println("\n===== UPDATE PET AGE =====");
+            showPetList(con);
+
+            System.out.println("\n===== 🎂 UPDATE PET AGE =====");
 
             System.out.print("🆔 Enter Pet ID: ");
             int petId = input.nextInt();
 
             input.nextLine();
 
-            System.out.print("🎂 New Age: ");
-            int age = input.nextInt();
+            if(petId == 0) {
+                System.out.println("↩ Returning to Admin Menu...");
+                return;
+            }
+            
+            System.out.println("\n========== AGE LEGEND ==========");
+            System.out.println("0.08 = 1 Month");
+            System.out.println("0.17 = 2 Months");
+            System.out.println("0.25 = 3 Months");
+            System.out.println("0.33 = 4 Months");
+            System.out.println("0.42 = 5 Months");
+            System.out.println("0.50 = 6 Months");
+            System.out.println("0.58 = 7 Months");
+            System.out.println("0.67 = 8 Months");
+            System.out.println("0.75 = 9 Months");
+            System.out.println("0.83 = 10 Months");
+            System.out.println("0.92 = 11 Months");
+            System.out.println("1.00 = 1 Year");
+            System.out.println("1.25 = 1 Year 3 Months");
+            System.out.println("1.50 = 1 Year 6 Months");
+            System.out.println("===============================\n");
 
-            Connection con = DbConnection.getConnection();
+            System.out.println("Enter the pet's age in decimal format based on the legend above.\n"
+                    + "Example: 0.50 = 6 Months, 1.25 = 1 Year 3 Months.");
+
+            System.out.print("🎂 New Age [0-30]: ");
+            double age;
+
+            while (true) {
+
+                if (!input.hasNextDouble()) {
+                    System.out.println("\n⚠ Invalid input: Input must be numerical.\n");
+                    continue;
+                }
+
+                age = input.nextDouble();
+
+                input.nextLine();
+
+                if (age < 0 || age > 30) {
+                    System.out.println("\n⚠ Invalid input: Age must be between 0 to 30.\n");
+                    continue;
+                }
+
+                break;
+            }
 
             String queryName
                     = "UPDATE pets "
@@ -256,7 +359,7 @@ public class UpdatePet {
 
             PreparedStatement pst = con.prepareStatement(queryName);
 
-            pst.setInt(1, age);
+            pst.setDouble(1, age);
             pst.setInt(2, petId);
 
             int rows = pst.executeUpdate();
@@ -268,7 +371,7 @@ public class UpdatePet {
             }
 
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println("\n❌ Error: " + e.getMessage());
         }
     }
 
@@ -278,18 +381,24 @@ public class UpdatePet {
     public static void updatePetSpecies() {
 
         try {
+            Connection con = DbConnection.getConnection();
 
-            System.out.println("\n===== UPDATE PET SPECIES =====");
+            showPetList(con);
+
+            System.out.println("\n===== 🐕 UPDATE PET SPECIES =====");
 
             System.out.print("🆔 Enter Pet ID: ");
             int petId = input.nextInt();
 
             input.nextLine();
 
+            if(petId == 0) {
+                System.out.println("↩ Returning to Admin Menu...");
+                return;
+            }
+            
             System.out.print("🐕 New Species: ");
             String species = input.nextLine();
-
-            Connection con = DbConnection.getConnection();
 
             String queryName
                     = "UPDATE pets "
@@ -310,7 +419,7 @@ public class UpdatePet {
             }
 
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println("\n❌ Error: " + e.getMessage());
         }
     }
 
@@ -320,18 +429,24 @@ public class UpdatePet {
     public static void updatePetBreed() {
 
         try {
+            Connection con = DbConnection.getConnection();
 
-            System.out.println("\n===== UPDATE PET BREED =====");
+            showPetList(con);
+
+            System.out.println("\n===== 🏷 UPDATE PET BREED =====");
 
             System.out.print("🆔 Enter Pet ID: ");
             int petId = input.nextInt();
 
             input.nextLine();
 
+            if(petId == 0) {
+                System.out.println("↩ Returning to Admin Menu...");
+                return;
+            }
+            
             System.out.print("🏷 New Breed: ");
             String breed = input.nextLine();
-
-            Connection con = DbConnection.getConnection();
 
             String queryName
                     = "UPDATE pets "
@@ -352,7 +467,7 @@ public class UpdatePet {
             }
 
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println("\n❌ Error: " + e.getMessage());
         }
     }
 
@@ -362,18 +477,25 @@ public class UpdatePet {
     public static void updatePetDescription() {
 
         try {
+            Connection con = DbConnection.getConnection();
 
-            System.out.println("\n===== UPDATE PET DESCRIPTION =====");
+            showPetList(con);
+            
+            System.out.println("\n===== 📝 UPDATE PET DESCRIPTION =====");
 
-            System.out.print("🆔 Enter Pet ID: ");
+            System.out.print("🆔 Enter Pet ID (press [0] to cancel): ");
             int petId = input.nextInt();
 
             input.nextLine();
+            
+            if(petId == 0) {
+                System.out.println("↩ Returning to Admin Menu...");
+                return;
+            }
+            
 
             System.out.print("📝 New Description: ");
             String desc = input.nextLine();
-
-            Connection con = DbConnection.getConnection();
 
             String queryName
                     = "UPDATE pets "
@@ -394,7 +516,7 @@ public class UpdatePet {
             }
 
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println("\n❌ Error: " + e.getMessage());
         }
     }
 }

@@ -1,5 +1,6 @@
 package adminchoices.update;
 
+import adminchoices.read.SearchArchivedPet;
 import adminchoices.read.ViewArchivedPets;
 import java.util.Scanner;
 import java.sql.*;
@@ -22,44 +23,44 @@ public class ArchivePetMenu {
             System.out.println("[3] ♻ Restore Pet");
             System.out.println("[4] 🔍 Search Archived Pet");
             System.out.println("[5] ↩ Return to Admin Menu");
-            
+
             System.out.print("\n👉 Choose an Option [1-5]: ");
-            
+
             int choice;
-            
+
             if (!input.hasNextInt()) {
                 System.out.println("❌ Invalid input!");
                 input.nextLine();
                 continue;
             }
-            
+
             choice = input.nextInt();
-            
+
             input.nextLine();
-            
+
             switch (choice) {
-                
+
                 case 1:
                     archivePet();
                     break;
-                
+
                 case 2:
                     ViewArchivedPets.viewArchivedPets();
                     break;
-                    
+
                 case 3:
                     RestoreArchivedPets.restorePet();
                     break;
-                    
+
                 case 4:
                     SearchArchivedPet.searchArchivedPet();
                     break;
-                    
+
                 case 5:
                     Admin.adminMenu();
                     System.out.println("\n↩ Returning to Admin Menu...");
                     break;
-                    
+
                 default:
                     System.out.println("❌ Invalid option!");
             }
@@ -73,10 +74,27 @@ public class ArchivePetMenu {
 
         try {
 
-            System.out.print("\n👉 Enter Pet ID: ");
-            int petId = input.nextInt();
+            System.out.print("\n🆔 Enter Pet ID (press 0 to cancel): ");
+            int petId;
 
-            input.nextLine();
+            while (true) {
+                if (!input.hasNextInt()) {
+                    System.out.println("\n⚠ Invalid input: Please enter a number.\n");
+                    input.nextLine();
+                    continue;
+                }
+
+                petId = input.nextInt();
+                
+                input.nextLine();
+
+                if (petId == 0) {
+                    System.out.println("\n↩ Returning to Archive Menu...");
+                    return;
+                }
+                
+                break;
+            }
 
             Connection con = DbConnection.getConnection();
 
@@ -92,15 +110,15 @@ public class ArchivePetMenu {
             int rows = pst.executeUpdate();
 
             if (rows > 0) {
-                System.out.println("\nPet archived.");
+                System.out.println("\n✅ Pet archived successfully.");
             } else {
-                System.out.println("\nArchive failed.");
+                System.out.println("\n❌ Archive failed.");
             }
 
             con.close();
 
         } catch (SQLException e) {
-            System.out.println("\nError: " + e.getMessage());
+            System.out.println("\n❌ Error: " + e.getMessage());
         }
     }
 }

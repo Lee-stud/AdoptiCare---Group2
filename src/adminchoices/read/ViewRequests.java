@@ -28,8 +28,10 @@ public class ViewRequests {
 
             ResultSet rs = st.executeQuery(selectReq);
 
+            System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
+
             System.out.printf(
-                    "%-10s %-8s %-8s %-25s %-12s %-25s %-15s%n",
+                    "| %-8s | %-8s | %-8s | %-25s | %-12s | %-25s | %-15s |%n",
                     "Req ID",
                     "User ID",
                     "Pet ID",
@@ -38,24 +40,25 @@ public class ViewRequests {
                     "Review Date",
                     "Remarks"
             );
-            System.out.println("--------------------------------------------------------------------------------");
+
+            System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
 
             if (rs.next()) {
 
                 do {
 
                     System.out.printf(
-                            "%-10d %-8d %-8d %-25s %-12s %-25s %-15s%n",
+                            "| %-8d | %-8d | %-8d | %-25s | %-12s | %-25s | %-15s |%n",
                             rs.getInt("request_id"),
                             rs.getInt("user_id"),
                             rs.getInt("pet_id"),
-                            rs.getTimestamp("request_date"),
+                            String.valueOf(rs.getTimestamp("request_date")),
                             rs.getString("status"),
-                            rs.getTimestamp("review_date"),
+                            String.valueOf(rs.getTimestamp("review_date")),
                             rs.getString("remarks")
                     );
 
-                    System.out.println("--------------------------------------------------------------------------------");
+                    System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
 
                 } while (rs.next());
 

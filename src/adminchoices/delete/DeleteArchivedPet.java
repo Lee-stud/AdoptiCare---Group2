@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
+import static util.ShowPetList.showPetList;
 
 public class DeleteArchivedPet {
     
@@ -16,11 +17,14 @@ public class DeleteArchivedPet {
             Connection con = DbConnection.getConnection();
             
             while (true) {
-                System.out.println("\\n===== 🗑 DELETE ARCHIVED PET =====");
-                System.out.print("🆔 Enter Archived Pet ID (press 0 to return): ");
+                showPetList(con);
+                
+                System.out.println("\n===== 🗑 DELETE ARCHIVED PET =====");
+                
+                System.out.print("🆔 Enter Archived Pet ID (press 0 to cancel): ");
                 
                 if (!input.hasNextInt()) {
-                    System.out.println("\n❌ Invalid input: Please enter a number.\n");
+                    System.out.println("\n⚠ Invalid input: Please enter a number.\n");
                     input.nextLine();
                     continue;
                 }
@@ -29,7 +33,7 @@ public class DeleteArchivedPet {
                 input.nextLine();
                 
                 if (petId == 0) {
-                    System.out.println("\n↩ Returning to Archived Pets Menu...");
+                    System.out.println("\n↩ Returning to Archived Pets Menu...\n");
                     return;
                 }
                 
@@ -63,7 +67,7 @@ public class DeleteArchivedPet {
                         return;
                     }
                     
-                    System.out.println("\n❌ Please enter Y or N.");
+                    System.out.println("\n⚠ Please enter Y or N.");
                 }
                 
                 String deleteSql = "DELETE "

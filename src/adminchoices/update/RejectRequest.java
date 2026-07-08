@@ -15,6 +15,7 @@ public class RejectRequest {
             String sql
                     = "UPDATE adoption_request "
                     + "SET "
+                    + "review_date = CURRENT_TIMESTAMP, "
                     + "status = 'Rejected', "
                     + "remarks = 'Not qualified', "
                     + "archived = 1 "

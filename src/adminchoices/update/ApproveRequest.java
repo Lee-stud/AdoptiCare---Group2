@@ -16,6 +16,7 @@ public class ApproveRequest {
             String approveQuery
                     = "UPDATE adoption_requests "
                     + "SET "
+                    + "review_date = CURRENT_TIMESTAMP, "
                     + "status = 'Approved', "
                     + "remarks = 'Qualified', "
                     + "archived = 1 "

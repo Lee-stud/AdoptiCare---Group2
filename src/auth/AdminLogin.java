@@ -27,19 +27,19 @@ public class AdminLogin {
                 username = input.nextLine();
 
                 if (username.isEmpty()) {
-                    System.out.println("\n⚠Username cannot be empty!");
+                    System.out.println("\n⚠ Username cannot be empty!");
                     System.out.println("👉 Please enter a username.\n");
                     continue;
                 }
 
                 if (username.contains(" ")) {
-                    System.out.println("\n⚠Username cannot contain spaces.");
+                    System.out.println("\n⚠ Username cannot contain spaces.");
                     System.out.println("👉 Use letters, numbers, or underscores (_).\n");
                     continue;
                 }
 
                 if (username.length() < 4) {
-                    System.out.println("\n⚠Username must be atleast 4 or more than letters!\n");
+                    System.out.println("\n⚠ Username must be atleast 4 or more than letters!\n");
                     continue;
                 }
 

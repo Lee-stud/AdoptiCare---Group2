@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
+
 public class ViewVaccinatedPets {
 
     public static void viewVaccinatedPets() {
@@ -19,12 +20,12 @@ public class ViewVaccinatedPets {
 
             String sql = "SELECT * "
                     + "FROM pet_medical_records "
-                    + "WHERE vaccination_status = 'Partially Vaccinated' OR vaccination_status = 'Fully Vaccinated'";
+                    + "WHERE vaccination_status = 'Fully Vaccinated'";
 
             Statement st = con.createStatement();
 
             ResultSet rs = st.executeQuery(sql);
-            
+
             System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
             System.out.printf(
@@ -52,8 +53,8 @@ public class ViewVaccinatedPets {
                             rs.getInt("pet_id"),
                             rs.getString("vaccine_name"),
                             rs.getString("health_condition"),
-                            String.valueOf(rs.getTimestamp("last_vaccination_date")),
-                            String.valueOf(rs.getTimestamp("next_vaccination_schedule")),
+                            String.valueOf(rs.getDate("last_vaccination_date")),
+                            String.valueOf(rs.getDate("next_vaccination_schedule")),
                             rs.getString("vaccination_status"),
                             rs.getString("diet"),
                             rs.getString("vitamins")
@@ -62,13 +63,14 @@ public class ViewVaccinatedPets {
                     System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
                 } while (rs.next());
-                
+
             } else {
                 System.out.println("\n❌ Vaccination status not found.");
             }
 
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println("\n❌ Error: " + e.getMessage());
         }
     }
+
 }

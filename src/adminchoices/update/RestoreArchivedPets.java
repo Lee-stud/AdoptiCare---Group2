@@ -47,7 +47,7 @@ public class RestoreArchivedPets {
 
             if (!rs.next()) {
                 System.out.println("❌ Archived pet not found.");
-                System.out.println("\nPress [Enter] to return to the Admin Menu...");
+                System.out.println("\n👉 Press [Enter] to return to the Admin Menu...");
                 input.nextLine();
                 con.close();
                 return;
@@ -71,7 +71,7 @@ public class RestoreArchivedPets {
                     return;
                 }
                 
-                System.out.println("\n❌ Invalid choice: Please enter Y or N.");
+                System.out.println("\n⚠ Invalid choice: Please enter Y or N.");
             }
             
             String Updatesql =
