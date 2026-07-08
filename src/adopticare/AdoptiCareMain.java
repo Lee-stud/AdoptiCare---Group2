@@ -23,7 +23,7 @@ public class AdoptiCareMain {
             System.out.println("\n🏡 Welcome to AdoptiCare! 🐶🐱 ");
 
             System.out.println("[1] 👤 Customer Login");
-            System.out.println("[2] 🔐 Reset Passoword (Customer)");
+            System.out.println("[2] 🔐 Reset Password (Customer)");
             System.out.println("[3] 👑 Admin Login");
             System.out.println("[4] 👨‍⚕ Veterinarian Login");
             System.out.println("[5] 📝 Register");
@@ -83,9 +83,6 @@ public class AdoptiCareMain {
             case "Customer":
                 Customer.customerMenu();
                 break;
-                
-            default:
-                System.out.println("\n❌ Invalid role.");
         }
     }
 
@@ -105,9 +102,6 @@ public class AdoptiCareMain {
        switch (role) {
            case "Administrator":
                Admin.adminMenu();
-               
-           default:
-               System.out.println("\n❌ Invalid role.");
        }
     }
 
@@ -127,9 +121,6 @@ public class AdoptiCareMain {
         switch (role) {
             case "Veterinarian":
                 Veterinarian.veterinarianMenu();
-                
-            default:
-                System.out.println("\n❌ Invalid role.");
         }
     }
 }
