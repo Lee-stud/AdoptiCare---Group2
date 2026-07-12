@@ -64,9 +64,8 @@ public class ArchiveMenu {
                     break;
 
                 case 6:
-                    Admin.adminMenu();
                     System.out.println("\n↩ Returning to Admin Menu...");
-                    break;
+                    return;
 
                 default:
                     System.out.println("❌ Invalid option!");

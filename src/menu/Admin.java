@@ -64,7 +64,6 @@ public class Admin {
                 case 7:
                     ViewRequests.viewRequests();
                     break;
-                            
                     
                 case 8:
                     System.out.println("\n✅ Logout Successfully!");

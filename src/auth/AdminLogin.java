@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
+import util.PasswordHash;
 
 public class AdminLogin {
 
@@ -17,7 +18,7 @@ public class AdminLogin {
             System.out.println("\n===== 👨‍💼 ADMIN LOGIN =====");
 
             String username, password;
-            
+
             //=====================
             //CHECK USER VALIDATION
             //=====================
@@ -76,20 +77,23 @@ public class AdminLogin {
 
             Connection con = DbConnection.getConnection();
 
-            String queryAdmin = "SELECT user_id, role FROM users WHERE username = ? AND password = ?";
+            String queryAdmin = "SELECT user_id, role, password FROM users WHERE username = ?";
 
             PreparedStatement pst = con.prepareStatement(queryAdmin);
 
             pst.setString(1, username);
-            pst.setString(2, password);
 
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {
 
-                System.out.println("\n✅ Login Successfully!");
-
-                return rs.getString("role");
+                String storedHash = rs.getString("password");
+                if (PasswordHash.verifyPassword(password, storedHash)) {
+                    System.out.println("\n✅ Login Successfully!");
+                    return rs.getString("role");
+                }
+                
+                
             } else {
                 System.out.println("\n❌ Incorrect username or password.");
             }

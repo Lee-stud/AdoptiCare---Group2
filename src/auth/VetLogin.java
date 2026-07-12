@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
+import util.PasswordHash;
 
 public class VetLogin {
 
@@ -75,20 +76,22 @@ public class VetLogin {
 
             Connection con = DbConnection.getConnection();
 
-            String sql = "SELECT user_id, role FROM users WHERE username = ? AND password = ?";
+            String sql = "SELECT user_id, role, password FROM users WHERE username = ?";
 
             PreparedStatement pst = con.prepareStatement(sql);
 
             pst.setString(1, username);
-            pst.setString(2, password);
 
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {
 
-                System.out.println("✅ Login Successfully!");
-
-                return rs.getString("role");
+                String storedHash = rs.getString("password");
+                if (PasswordHash.verifyPassword(password, storedHash)) {
+                    System.out.println("✅ Login Successfully!");
+                    return rs.getString("role");
+                }
+                
             } else {
                 System.out.println("❌ Incorrect username or password.");
             }
